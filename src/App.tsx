@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { projectId, publicAnonKey } from './utils/supabase/info';
 import './styles/App.css';
+import { ImageWithFallback } from './components/figma/ImageWithFallback';
+
 
 interface FormData {
   name: string;
@@ -153,10 +155,14 @@ function App() {
     }
   };
 
+    const scrollToContact = () => {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    };
+
   return (
     <div className="app">
       {/* Navigation */}
-      <nav className="navbar">
+      {/* <nav className="navbar">
         <div className="container">
           <div className="nav-brand">MyWebsite</div>
           <ul className="nav-menu">
@@ -166,25 +172,79 @@ function App() {
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
-      </nav>
+      </nav> */}
 
       {/* Hero Section */}
-      <section id="home" className="hero">
+      {/* <section id="home" className="hero">
         <div className="hero-content">
           <h1>Welcome to MyWebsite</h1>
-          <p>Professional solutions for your business needs</p>
+          <p>Building innovative solutions with modern technologies and cloud services</p>
           <a href="#contact" className="btn btn-primary">Get in Touch</a>
         </div>
-      </section>
+      </section> */}
+      <section style={{
+      position: 'relative',
+      height: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden'
+    }}>
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <ImageWithFallback
+          src="https://images.unsplash.com/photo-1630283017802-785b7aff9aac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBvZmZpY2UlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYxNTMwMTEyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+          alt="Hero background"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom right, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8))'
+        }} />
+      </div>
+      
+      <div style={{
+        position: 'relative',
+        zIndex: 10,
+        textAlign: 'center',
+        color: 'white',
+        padding: '0 1rem'
+      }}>
+        <h1 style={{ marginBottom: '1rem', fontSize: '2rem' }}>Welcome to My Website</h1>
+        <p style={{
+          maxWidth: '48rem',
+          margin: '0 auto 2rem',
+          color: '#cbd5e1',
+          fontSize: '1.125rem'
+        }}>
+          Building innovative solutions with modern technologies and cloud services
+        </p>
+        <button
+          onClick={scrollToContact}
+          className="btn btn-primary"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem'
+          }}
+        >
+          Get in Touch
+          {/* <svg className="icon" viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg> */}
+        </button>
+      </div>
+    </section>
+
 
       {/* About Section */}
       <section id="about" className="section">
         <div className="container">
-          <h2 className="section-title">About Us</h2>
+          <h2 className="section-title">About Jay</h2>
           <p className="section-description">
-            We are a dedicated team of professionals committed to delivering exceptional
-            services and solutions. With years of experience in the industry, we pride
-            ourselves on our attention to detail and customer satisfaction.
+            I am dedicated young professional committed to delivering exceptional
+            services and cloud solutions. With passion of software development, I pride
+            myself on our attention to detail and success.
           </p>
         </div>
       </section>
@@ -192,22 +252,22 @@ function App() {
       {/* Services Section */}
       <section id="services" className="section section-gray">
         <div className="container">
-          <h2 className="section-title">Our Services</h2>
+          <h2 className="section-title">Powered by AWS</h2>
           <div className="services-grid">
             <div className="service-card">
               <div className="service-icon">🚀</div>
-              <h3>Strategy</h3>
-              <p>Comprehensive business strategies tailored to your goals</p>
+              <h3>AWS S3 Integration</h3>
+              <p>Secure file storage and management with Amazon S3</p>
             </div>
             <div className="service-card">
               <div className="service-icon">💡</div>
-              <h3>Consulting</h3>
-              <p>Expert consulting services to help your business grow</p>
+              <h3>DynamoDB Database</h3>
+              <p>Fast and scalable NoSQL database for all your data needs</p>
             </div>
             <div className="service-card">
               <div className="service-icon">🎯</div>
-              <h3>Solutions</h3>
-              <p>Innovative solutions designed for your success</p>
+              <h3>Lambda Functions</h3>
+              <p>Serverless computing for efficient and cost-effective operations</p>
             </div>
           </div>
         </div>
@@ -216,9 +276,9 @@ function App() {
       {/* Contact Section */}
       <section id="contact" className="section">
         <div className="container">
-          <h2 className="section-title">Contact Us</h2>
+          <h2 className="section-title">Get in Touch</h2>
           <p className="section-description">
-            Have a question or want to work together? Send us a message!
+           Send me a message and I'll get back to you as soon as possible
           </p>
           
           <form onSubmit={handleSubmit} className="contact-form">
@@ -296,9 +356,9 @@ function App() {
         <div className="container">
           <p>&copy; 2025 MyWebsite. All rights reserved.</p>
           <p className="footer-tech">Powered by AWS DynamoDB, S3, IAM & Lambda</p>
-          <button onClick={fetchContacts} className="btn btn-secondary btn-sm">
+          {/* <button onClick={fetchContacts} className="btn btn-secondary btn-sm">
             View Submissions (Admin)
-          </button>
+          </button> */}
         </div>
       </footer>
 
