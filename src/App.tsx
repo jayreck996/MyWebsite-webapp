@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { projectId, publicAnonKey } from './utils/supabase/info';
 import './styles/App.css';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
-
+import { getApiUrl } from './utils/api/config';
 
 interface FormData {
   name: string;
@@ -78,82 +78,56 @@ function App() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
+  // POST contact
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!validateForm()) return;
+
+  setIsSubmitting(true);
+  setSubmitStatus({ type: null, message: '' });
+
+  try {
+    const response = await fetch(`${getApiUrl()}/contact`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to submit form');
     }
 
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: '' });
+    setSubmitStatus({
+      type: 'success',
+      message: 'Thank you for your message! We will get back to you soon.',
+    });
 
-    try {
-      const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-928e78a6/contact`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${publicAnonKey}`
-          },
-          body: JSON.stringify(formData)
-        }
-      );
+    setFormData({ name: '', email: '', subject: '', message: '' });
+  } catch (error) {
+    console.error('Error submitting contact form:', error);
+    setSubmitStatus({
+      type: 'error',
+      message: error instanceof Error ? error.message : 'Failed to submit form. Please try again.',
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to submit form');
-      }
-
-      setSubmitStatus({
-        type: 'success',
-        message: 'Thank you for your message! We will get back to you soon.'
-      });
-
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-    } catch (error) {
-      console.error('Error submitting contact form:', error);
-      setSubmitStatus({
-        type: 'error',
-        message: error instanceof Error ? error.message : 'Failed to submit form. Please try again.'
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const fetchContacts = async () => {
-    try {
-      const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-928e78a6/contacts`,
-        {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${publicAnonKey}`
-          }
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to fetch contacts');
-      }
-
+// GET contacts
+const fetchContacts = async () => {
+  const res = await fetch(`${getApiUrl()}/submissions`, {
+  method: 'GET',
+  headers: { 'Content-Type': 'application/json' },
+  cache: 'no-store' // <- bypass browser cache
+});
+  const data = await res.json(); // safe now
       setContacts(data.contacts || []);
       setShowAdmin(true);
-    } catch (error) {
-      console.error('Error fetching contacts:', error);
-      alert('Failed to fetch contacts: ' + (error instanceof Error ? error.message : 'Unknown error'));
-    }
-  };
+};
 
     const scrollToContact = () => {
       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -356,9 +330,9 @@ function App() {
         <div className="container">
           <p>&copy; 2025 MyWebsite. All rights reserved.</p>
           <p className="footer-tech">Powered by AWS DynamoDB, S3, IAM & Lambda</p>
-          {/* <button onClick={fetchContacts} className="btn btn-secondary btn-sm">
+          <button onClick={fetchContacts} className="btn btn-secondary btn-sm">
             View Submissions (Admin)
-          </button> */}
+          </button> 
         </div>
       </footer>
 
