@@ -1,7 +1,7 @@
 {
   "name": "mywebsite-webapp",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://1-15-user.s3.us-east-1.amazonaws.com",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
