@@ -38,8 +38,8 @@ npm install
 ```
 
 3. Set up environment variables:
-   - Copy `.env.example` to `.env` (if available)
-   - Configure your AWS credentials and endpoints
+   - Create a `.env` file in the project root if needed
+   - Configure your AWS credentials and endpoints as required
 
 ### Running the Application
 
