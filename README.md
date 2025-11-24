@@ -1,46 +1,100 @@
-# Getting Started with Create React App
+# MyWebsite - Jay's Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern web application built with React and TypeScript, showcasing cloud-native development with AWS services.
 
-## Available Scripts
+## 🌟 Features
 
-In the project directory, you can run:
+- **Contact Form**: Integrated contact form with form validation
+- **AWS Integration**: Powered by AWS services including DynamoDB, S3, Lambda, and IAM
+- **Modern UI**: Clean and responsive design with smooth animations
+- **Admin Dashboard**: View contact submissions through an admin interface
 
-### `npm start`
+## 🛠️ Technologies Used
 
-Runs the app in the development mode.\
+- **Frontend**: React 19, TypeScript
+- **Styling**: CSS3 with custom styling
+- **Cloud Services**: AWS (DynamoDB, S3, Lambda, IAM)
+- **Build Tool**: Create React App
+- **Testing**: Jest, React Testing Library
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/jayreck996/MyWebsite-webapp.git
+cd MyWebsite-webapp
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+   - Copy `.env.example` to `.env` (if available)
+   - Configure your AWS credentials and endpoints
+
+### Running the Application
+
+#### Development Mode
+
+Runs the app in development mode with hot reload:
+```bash
+npm start
+```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Production Build
 
-### `npm test`
+Creates an optimized production build:
+```bash
+npm run build
+```
+The build artifacts will be stored in the `build/` folder.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Testing
 
-### `npm run build`
+Run the test suite:
+```bash
+npm test
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📁 Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+MyWebsite-webapp/
+├── public/              # Static files
+├── src/
+│   ├── components/      # React components
+│   ├── styles/          # CSS stylesheets
+│   ├── utils/           # Utility functions
+│   ├── App.tsx          # Main application component
+│   └── index.tsx        # Application entry point
+├── package.json         # Dependencies and scripts
+└── tsconfig.json        # TypeScript configuration
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🤝 Contributing
 
-### `npm run eject`
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📄 License
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This project is open source and available for educational purposes.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 📧 Contact
 
-## Learn More
+Feel free to reach out through the contact form on the website or open an issue on GitHub.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Built with ❤️ using React and AWS
